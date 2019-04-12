@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mi primera app con AngularJS</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+	<script src="js/app.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="main">
+	<main class="container">
+		<h1>Listado de profesores</h1>
+		<label>Mostrar: </label><input type="checkbox" ng-model="mostrar">
+		<table ng-controller="tabla" ng-show="mostrar" class="table table-hover">
+		    <tr class="bg-danger">
+		      <th>Nombre</th>
+		      <th>Apellido</th>
+		      <th>Materia</th>
+		      <th>Borrar</th>
+		    </tr>
+			<tr ng-repeat="profesor in profesores">
+			  <td>{{profesor.nombre}}</td>
+			  <td>{{profesor.apellido}}</td>
+			  <td>{{profesor.materia}}</td>
+			  <td ng-click="borrar($index)"><span>X</span></td>
+			</tr>
+		</table>
+
+		<p>El total de profesores es: {{profesores.length}}</p>
+
+	</main>
+
+</body>
+</html>
