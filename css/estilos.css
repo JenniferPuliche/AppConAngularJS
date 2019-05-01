@@ -1,7 +1,24 @@
+.titulo{
+	font-size: 32px;
+}
+
 td span{
 	cursor: pointer;
 }
 
+td span:hover{
+	color:red;
+}
+
+td, tr{
+	text-align: center;
+}
+
 label{
 	padding: 6px;
+}
+
+img{
+	width: 150px;
+	margin: 12px;
 }

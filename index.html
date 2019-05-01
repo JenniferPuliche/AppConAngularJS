@@ -2,34 +2,55 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Mi primera app con AngularJS</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>App con AngularJS</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
 	<script src="js/app.js"></script>
 </head>
-
 <body ng-app="myApp" ng-controller="main">
+	<nav class="navbar navbar-light bg-light">
+  	<a class="navbar-brand titulo ">Listado de profesores</a>
+		<form class="form-inline">
+		    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" ng-model="campoBusqueda">
+		</form>
+	</nav>
 	<main class="container">
-		<h1>Listado de profesores</h1>
 		<label>Mostrar: </label><input type="checkbox" ng-model="mostrar">
 		<table ng-controller="tabla" ng-show="mostrar" class="table table-hover">
 		    <tr class="bg-danger">
 		      <th>Nombre</th>
 		      <th>Apellido</th>
 		      <th>Materia</th>
+		      <th>Sueldo</th>
 		      <th>Borrar</th>
 		    </tr>
 			<tr ng-repeat="profesor in profesores">
 			  <td>{{profesor.nombre}}</td>
 			  <td>{{profesor.apellido}}</td>
 			  <td>{{profesor.materia}}</td>
+			  <td>{{profesor.sueldo| currency: '$' : 0}}</td>
 			  <td ng-click="borrar($index)"><span>X</span></td>
 			</tr>
 		</table>
-
-		<p>El total de profesores es: {{profesores.length}}</p>
-
+		<div ng-controller="detalleCtrl">
+			<div class="jumbotron">
+				<h3>Entregaron planilla con notas {{cuantos()}}, de un total de {{profesores.length}} profesores</h3>
+		 		<select ng-options="profesor.nombre for profesor in profesores" ng-model="menuProfesores">
+		 			<option value="">Elegir profesor</option>
+		 		</select>
+			 	<div class="media" ng-repeat="profesor in profesores">
+					<img ng-src="{{profesor.imagen}}" class="align-self-center mr-3" alt="{{profesor.apellido}}">
+					<div class="media-body">
+					    <h5 class="mt-0">{{profesor.nombre| uppercase}} {{profesor.apellido| uppercase}}</h5>
+					    <p>Materia: {{profesor.materia}}</p>
+					    <p>Entregó planilla: <input type="checkbox" ng-model="profesor.planilla"></p>
+					    <p>Horarios: {{profesor.descripcion}}</p>
+					</div>
+				</div>
+	 		</div>
+	 	</div>
 	</main>
 
 </body>
