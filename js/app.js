@@ -1,4 +1,4 @@
-angular.module('myApp', [])
+angular.module('myApp', ['ngAnimate'])
 
 .controller('main', function($scope){
 $scope.mostrar=true
@@ -23,5 +23,13 @@ $scope.profesores=
 			contador += profesor.planilla == true
 		})
 		return contador
+	}
+})
+
+.filter('maximo', function(){
+	return function(texto, max){
+		if (texto.length > max) {
+			return texto.substring(0,max) + ' ... '
+		}
 	}
 })

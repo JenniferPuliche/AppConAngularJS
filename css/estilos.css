@@ -22,3 +22,17 @@ img{
 	width: 150px;
 	margin: 12px;
 }
+
+p.busqueda{
+	color: red;
+	width: 600px;
+	position: relative;
+	left: 0;
+	transition: all linear 1s;
+}
+
+p.busqueda.ng-hide{
+	opacity: 0;
+	left: -300px;
+}
+
