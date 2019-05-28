@@ -36,3 +36,26 @@ p.busqueda.ng-hide{
 	left: -300px;
 }
 
+.error{
+	color: red;
+	padding: 2px;
+}
+
+
+.boton{
+	margin-left: 40%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+form[name="formulario"]{
+	background-color: #f5f5f5;
+    margin: 15px;
+    padding: 15px;
+    width: 500px;
+}
+
+
+h5{
+	margin-top: 14px;
+}

@@ -18,7 +18,11 @@
 		</form>
 	</nav>
 	<main class="container">
-		<label>Mostrar: </label><input type="checkbox" ng-model="mostrar">
+		<div class="checkbox">
+			<label for="ver">Mostrar: </label>
+			<input type="checkbox" ng-model="mostrar" id="ver">
+		</div>
+
 		<div ng-controller="tabla">
 			<table ng-show="mostrar" class="table table-hover">
 			    <tr class="bg-danger">
@@ -38,6 +42,48 @@
 			</table>
 			<p class="busqueda" ng-show="buscar.length == 0">La búsqueda no coincide con ningun elemento, por favor vuelva a buscar</p>
 		</div>
+		
+		<input type="button" class="btn btn-danger boton" value="Agregar un profesor" ng-click="ingresar()" ng-hide="formVisible">
+		<center><form name="formulario" ng-controller="form" ng-show="formVisible" novalidate>
+			<div class="form-group">
+				<label>Nombre
+					<input required type="text" class="form-control" ng-model="campo.nombre" name="nombre">
+				</label>
+				<p class="error" ng-show="formulario.nombre.$invalid && formulario.nombre.$touched">Este campo es obligatorio</p>
+			</div>
+			<div class="form-group">
+				<label>Apellido
+					<input required type="text" class="form-control" ng-model="campo.apellido" name="apellido">
+				</label>
+				<p class="error" ng-show="formulario.apellido.$invalid && formulario.apellido.$touched">Este campo es obligatorio</p>
+			</div>
+			<div class="form-group">
+				<label>Materia
+					<input required type="text" class="form-control" ng-model="campo.materia" name="materia">
+				</label>
+				<p class="error" ng-show="formulario.materia.$invalid && formulario.materia.$touched">Este campo es obligatorio</p>
+			</div>
+			<div class="form-group">
+				<label>Sueldo
+					<input required type="number" min="5000" class="form-control" ng-model="campo.sueldo" name="sueldo">
+				</label>
+				<div ng-show="formulario.sueldo.$touched">
+					<p class="error" ng-show="formulario.sueldo.$error.required">Este campo es obligatorio</p>
+					<p class="error" ng-show="formulario.sueldo.$error.number">En este campo solo se permiten números</p>
+					<p class="error" ng-show="formulario.sueldo.$error.min">El monto minimo es 5000</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Descripción
+					<textarea required ng-minlength="5" class="form-control" ng-model="campo.descripcion" name="descripcion"></textarea>
+				</label>
+				<div ng-show="formulario.descripcio.$touched">
+					<p class="error" ng-show="formulario.descripcion.$error.required">Este campo es obligatorio</p>
+					<p class="error" ng-show="formulario.descripcion.$error.minlength">La cantidad minima es de cinco caracteres</p>
+				</div>
+			</div>
+			<input type="button" class="btn btn-danger" value="Agregar" ng-click="agregar()" ng-disabled="formulario.$invalid">
+		</form></center>
 		<div ng-controller="detalleCtrl">
 			<div class="jumbotron">
 				<h3>Entregaron planilla con notas {{cuantos()}}, de un total de {{profesores.length}} profesores</h3>
@@ -47,7 +93,7 @@
 			 	<div class="media" ng-repeat="profesor in profesores">
 					<img ng-src="{{profesor.imagen}}" class="align-self-center mr-3" alt="{{profesor.apellido}}">
 					<div class="media-body">
-					    <h5 class="mt-0">{{profesor.nombre| uppercase}} {{profesor.apellido| uppercase}}</h5>
+					    <h5>{{profesor.nombre| uppercase}} {{profesor.apellido| uppercase}}</h5>
 					    <p>Materia: {{profesor.materia}}</p>
 					    <p>Entregó planilla: <input type="checkbox" ng-model="profesor.planilla"></p>
 					    <p>Horarios: {{profesor.descripcion}}</p>

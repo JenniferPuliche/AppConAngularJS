@@ -8,6 +8,12 @@ $scope.profesores=
 	{"nombre":"Juan", "apellido":"Gonzalez", "materia":"Matemática", "imagen": "imagenes/juan.jpg", "sueldo": 25092, "planilla": false, "descripcion": "El profesor da clases los dias lunes y viernes en el turno tarde"},
 	{"nombre":"Aldo", "apellido":"Barrios", "materia":"Inglés", "imagen": "imagenes/aldo.jpg", "sueldo": 20800, "planilla": true, "descripcion": "El profesor da clases los dias miércoles y jueves en el turno mañana"}
 ]
+
+	$scope.formVisible = false
+	$scope.ingresar = function(){
+	$scope.formVisible = true
+}
+
 })
 
 .controller('tabla', function($scope){
@@ -26,6 +32,16 @@ $scope.profesores=
 	}
 })
 
+.controller('form', function($scope){
+	$scope.agregar = function(){
+		$scope.profesores.push($scope.campo)
+		$scope.campo={}
+		$scope.formVisible = false
+	}
+
+})
+
+
 .filter('maximo', function(){
 	return function(texto, max){
 		if (texto.length > max) {
@@ -33,3 +49,4 @@ $scope.profesores=
 		}
 	}
 })
+
